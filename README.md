@@ -1,97 +1,83 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Pytrix — Mobile App for Learning Basic Python
 
-# Getting Started
+> **Offline-first, handwriting-inspired mobile application for mastering basic Python with line-by-line execution visualizers and 3-problem checkpoints.**
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+---
 
-## Step 1: Start Metro
+## 🌟 Key Product Innovations
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+1. **✍️ Handwriting-Inspired Copybook Editor:**
+   - Analogous to calligraphy dotted-line copybooks: beginner students see reference code rendered as a faded gray ghost layer (`#555A70`).
+   - As characters are typed correctly on the keyboard, code transforms into vibrant, syntax-highlighted tokens.
+   - Detects character order, bracket mismatches (`print[` vs `print(`), quote errors, and indentation issues in real time.
+   - Offers **Mode A (Trace the Code)**, **Mode B (Fill in Missing Code)**, and **Mode C (Independent Coding)**.
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+2. **🔍 Line-by-Line Python Execution Visualizer:**
+   - Steppable execution controller: `|◁ Reset`, `◀ Prev`, `▷ Play / ⏸ Pause`, `Next ▶`.
+   - Real-time `sys.settrace()` frame capture: highlights the actively running line with a pointer `▶`.
+   - Live Memory Inspector displaying variable names, data types (`int`, `str`, `float`), and value changes.
+   - Live synchronized terminal console output reflecting text printed up to each step.
+   - 5-second watchdog timer guarding against infinite loops.
 
-```sh
-# Using npm
-npm start
+3. **🏆 3-Distinct-Problem Checkpoint Mastery:**
+   - To unlock the next topic, learners must pass **3 distinct, unique problems** in the topic checkpoint.
+   - Anti-spam deduplication guarantees that repeatedly executing the same solution does not count as multiple solutions.
+   - Atomic SQLite transactions commit completions and unlock subsequent topics.
 
-# OR using Yarn
-yarn start
+4. **✈️ 100% Offline Independence:**
+   - Bundled Pyodide WebAssembly runtime, SQLite database, and complete curriculum.
+   - Operates in Airplane Mode with 0 KB network requirements.
+   - 100% on-device data processing with zero telemetry or tracking.
+
+---
+
+## 📱 Navigation Architecture
+
+### Bottom Tabs (4)
+- **Home:** Daily streak, Python XP, active topic continue card, feature highlight.
+- **Learn:** 6-module syllabus breakdown across 24 topics with lock/available badges.
+- **Practice:** Sandbox arena toggling Mode A (Trace), Mode B (Fill-in), and Mode C (Independent).
+- **Profile:** Learner level, offline system diagnostics, theme switch, settings navigation.
+
+### Specialized Screens (13)
+- `WelcomeScreen`: Onboarding introduction and feature showcase.
+- `TopicLearningScreen`: Reading theory, learning objectives, code breakdowns, common pitfalls.
+- `KnowledgeCheckScreen`: Pre-practice micro-quizzes with instant answer feedback.
+- `ProblemExplanationScreen`: 4-step logic framework (Problem, Logic, Steps, Editor).
+- `HandwritingEditorScreen`: CodeMirror 6 copybook editor with live progress percentage.
+- `ExecutionVisualizerScreen`: Steppable debugger and variable inspector.
+- `CheckpointScreen`: 3-problem assessment gating.
+- `TopicCompletedScreen`: Celebration screen with XP rewards and streak increments.
+- `SettingsScreen`: Theme toggle, offline diagnostics, progress reset guard.
+- `PrivacyPolicyScreen`: Complete on-device privacy guarantee.
+
+---
+
+## 🛠️ Technology Stack
+
+- **Framework:** React Native CLI (0.88+)
+- **Language:** TypeScript & JavaScript
+- **Navigation:** React Navigation (Bottom Tabs + Native Stack)
+- **Database:** Local SQLite with parameterized queries, transactions, and migration runner
+- **Editor Engine:** Embedded CodeMirror 6 with custom ghost-text overlay
+- **Python Runtime:** Offline Pyodide WebAssembly with `sys.settrace()` instrumentation
+- **State Management:** Zustand & local React state
+
+---
+
+## 🧪 Testing & Quality Assurance
+
+To execute all test suites:
+```bash
+npm test
 ```
 
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+To run TypeScript type checks:
+```bash
+npx tsc --noEmit
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+To run ESLint style and formatting checks:
+```bash
+npm run lint
 ```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
